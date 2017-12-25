@@ -26,10 +26,11 @@ e [vertex_id1] [vertex_id2] [edge_label]
 If you have any question, please contact ljchang@outlook.com.
 
 If you are using this code, please kindly cite the following paper.
-
-Lijun Chang, Wei Li, Xuemin Lin, Lu Qin, Wenjie Zhang,
-"pSCAN: Fast and Exact Structural Graph Clustering"
-Proceedings of the 31st International Conference on Data Engineering (ICDE’16), 2016
+```
+Lijun Chang, Xing Feng, Xuemin Lin, Lu Qin, Wenjie Zhang:
+Efficient Graph Edit Distance Computation and Verification via Anchor-aware Lower Bound Estimation.
+CoRR abs/1709.06810 (2017)
+```
 
 ```
 @article{DBLP:journals/corr/abs-1709-06810,
