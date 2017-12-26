@@ -1,6 +1,6 @@
 # Graph_Edit_Distance
 
-ged is the executable, and is compiled on Debian Linux System.
+[ged](ged) is the executable, and is compiled on Debian Linux System.
 
 ## Running format 
 ./ged [1. query_graph_file] [2. data_graph_file] [3. “astar” or “bfs”] [4. “LS” or “LSa” or “BM” or “BMa” or “SM” or “SMa” or “BMb”] [5. threshold, optional]
