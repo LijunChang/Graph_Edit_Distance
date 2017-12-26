@@ -4,6 +4,8 @@ This project includes the codes for computing and verifying the graph edit dista
 
 [ged](ged) is the executable, and is compiled on Debian Linux System.
 
+[graph_q.txt](graph_q.txt) and [graph_g.txt](graph_g.txt) are example graphs.
+
 ## Running Format 
 ./ged [1. query_graph_file] [2. data_graph_file] [3. “astar” or “bfs”] [4. “LS” or “LSa” or “BM” or “BMa” or “SM” or “SMa” or “BMb”] [5. threshold, optional]
 
