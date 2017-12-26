@@ -4,7 +4,7 @@ This project includes the codes for computing and verifying the graph edit dista
 
 [ged](ged) is the executable, and is compiled on Debian Linux System.
 
-## Running format 
+## Running Format 
 ./ged [1. query_graph_file] [2. data_graph_file] [3. “astar” or “bfs”] [4. “LS” or “LSa” or “BM” or “BMa” or “SM” or “SMa” or “BMb”] [5. threshold, optional]
 
 Computes or verifies GED between graphs in query_graph_file and graphs in data_graph_file in a pairwise manner
@@ -19,7 +19,7 @@ Computes or verifies GED between graphs in query_graph_file and graphs in data_g
 ```
 Note that, the fastest algorithm is astar + BMa
 
-## graph format
+## Graph Format
 t [starts a new graph, followed by two arbitrary strings]
 
 v [vertex_id] [vertex_label]
