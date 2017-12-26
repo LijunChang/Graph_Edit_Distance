@@ -9,11 +9,11 @@ This project includes the codes for computing and verifying the graph edit dista
 
 Computes or verifies GED between graphs in query_graph_file and graphs in data_graph_file in a pairwise manner
 
-* Running example for GED computation
+* **Running example for GED computation**
 ```
 ./ged graph_q.txt graph_g.txt astar BMa
 ```
-* Running example for GED verification
+* **Running example for GED verification**
 ```
 ./ged graph_q.txt graph_g.txt astar BMa 7
 ```
