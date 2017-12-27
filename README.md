@@ -1,6 +1,6 @@
 # Graph_Edit_Distance
 
-This project includes the codes for computing and verifying the graph edit distance between two graphs. It outperforms the state-of-the-art algorithms by several orders of magnitude. Details can be found in our paper [Efficient Graph Edit Distance Computation and Verification via Anchor-aware Lower Bound Estimation](https://arxiv.org/abs/1709.06810).
+This project includes the codes for exactly computing and verifying the graph edit distance between two graphs. It outperforms the state-of-the-art algorithms by several orders of magnitude. Details can be found in our paper [Efficient Graph Edit Distance Computation and Verification via Anchor-aware Lower Bound Estimation](https://arxiv.org/abs/1709.06810).
 
 [ged](ged) is the executable, and is compiled on Debian Linux System. [graph_q.txt](graph_q.txt) and [graph_g.txt](graph_g.txt) are example graphs.
 
