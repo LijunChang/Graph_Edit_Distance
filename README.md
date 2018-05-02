@@ -5,19 +5,19 @@ This project includes the codes for exactly computing and verifying the graph ed
 [ged](ged) is the executable, and is compiled on macOS Sierra. [graph_q.txt](graph_q.txt) and [graph_g.txt](graph_g.txt) are example graphs.
 
 ## Running Format 
-./ged [1. query_graph_file] [2. data_graph_file] [3. “astar” or “bfs”] [4. “LS” or “LSa” or “BM” or “BMa” or “SM” or “SMa” or “BMb”] [5. threshold, optional]
+./ged [1. query_graph_file] [2. data_graph_file] [3. “astar” or “bfs”] [4. “LS” or “LSa” or “BMo” or “BMao” or “SM” or “SMa” or “BMa”] [5. threshold, optional]
 
 Computes or verifies GED between graphs in query_graph_file and graphs in data_graph_file in a pairwise manner
 
 * **Running example for GED computation**
 ```
-./ged graph_q.txt graph_g.txt astar BMa
+./ged graph_q.txt graph_g.txt astar BMao
 ```
 * **Running example for GED verification**
 ```
-./ged graph_q.txt graph_g.txt astar BMa 7
+./ged graph_q.txt graph_g.txt astar BMao 7
 ```
-Note that, the fastest algorithm is astar + BMa
+Note that, the fastest and scalable algorithm is astar+BMao
 
 ## Graph Format
 t [starts a new graph, followed by two arbitrary strings]
