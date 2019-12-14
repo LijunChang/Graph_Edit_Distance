@@ -2,7 +2,9 @@
 
 This project aims at exact graph edit distance (GED) computation and GED verification (verify whether the GED between two  (labeled) graphs is smaller than a given threshold), where all edit operators are assumed to have unit costs. It outperforms the state-of-the-art algorithms by several orders of magnitude. Details can be found in our paper https://lijunchang.github.io/ged.pdf.
 
-[ged](ged) is the executable, and is compiled on macOS Sierra. [ged_debian](ged_debian) is the exectuable compiled on Debian. Source code will be available soon.
+[ged](ged) is the executable, and is compiled on macOS Sierra. [ged_debian](ged_debian) is the exectuable compiled on Debian. 
+
+Source code will be available soon.
 
 [graph_q.txt](graph_q.txt) and [graph_g.txt](graph_g.txt) are example graphs.
 
