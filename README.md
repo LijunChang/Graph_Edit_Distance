@@ -44,4 +44,4 @@ v [vertex_id] [vertex_label]
 
 e [vertex_id1] [vertex_id2] [edge_label]
 
-[datasets/graph_q.txt](graph_q.txt) and [datasets/graph_g.txt](graph_g.txt) are two example data files. Note that, vertex_id must be consecutive numbers starting from 0.
+[graph_q.txt](datasets/graph_q.txt) and [graph_g.txt](datasets/graph_g.txt) are two example data files. Note that, vertex_id must be consecutive numbers starting from 0.
