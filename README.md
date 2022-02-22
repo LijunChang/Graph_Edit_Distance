@@ -21,25 +21,27 @@ $ make
 It generates an executable "ged".
 
 ## Run the code
-./ged [1. query_graph_file] [2. data_graph_file] [3. “astar” or “bfs”] [4. “LS” or “LSa” or “BMo” or “BMao” or “SM” or “SMa” or “BMa”] [5. threshold, optional]
 
-Computes or verifies GED between graphs in query_graph_file and graphs in data_graph_file in a pairwise manner
+You can find how to use the code by
+```sh
+$ ./ged -h
+```
 
-* **Running example for GED computation**
-```
-./ged graph_q.txt graph_g.txt astar BMao
-```
-* **Running example for GED verification**
-```
-./ged graph_q.txt graph_g.txt astar BMao 7
-```
-Note that, the fastest and scalable algorithm is astar+BMao
+An example of graph similarity search on the AIDS dataset with threshold 5 is as follows
+```sh
+$ ./ged -d datasets/AIDS.txt -q datasets/AIDS_query100.txt -m search -p astar -l LSa -t 5
+``` 
 
-## Graph Format
+An example of one-by-one GED computation between graphs in two files is as follows
+```sh
+$ ./ged -d datasets/graph_g.txt -q datasets/graph_q.txt -m pair -p astar -l LSa -g
+```
+
+## Data format
 t [starts a new graph, followed by two arbitrary strings]
 
 v [vertex_id] [vertex_label]
 
 e [vertex_id1] [vertex_id2] [edge_label]
 
-[graph_q.txt](graph_q.txt) and [graph_g.txt](graph_g.txt) are example graphs.
+[datasets/graph_q.txt](graph_q.txt) and [datasets/graph_g.txt](graph_g.txt) are two example data files. Note that, vertex_id must be consecutive numbers starting from 0.
