@@ -1,4 +1,4 @@
-# Graph Edit Distance Computation and Verification
+# Graph Edit Distance Computation
 
 This repository implements graph edit distance (GED) computation and GED verification (i.e., verify whether the GED between two (labeled) graphs is smaller than a given threshold) algorithms proposed in the following two papers. Note that, our implementations assume uniform edit cost. If you are using the code, please cite our papers.
 
