@@ -2,13 +2,13 @@ This repository implements graph edit distance (GED) computation and GED verific
 
 <pre>
 Lijun Chang, Xing Feng, Xuemin Lin, Lu Qin, Wenjie Zhang, Dian Ouyang.
-<a href="pdf/icde20.pdf">Speeding Up GED Verification for Graph Similarity Search.</a>
+<a href="https://lijunchang.github.io/pdf/2020-ged-icde.pdf">Speeding Up GED Verification for Graph Similarity Search.</a>
 Proceedings of the 36th International Conference on Data Engineering (ICDE’20), 2020
 </pre>
 
 <pre>
 Lijun Chang, Xing Feng, Kai Yao, Lu Qin, Wenjie Zhang.
-<a href="pdf/tkde22.pdf">Accelerating Graph Similarity Search via Efficient GED Computation.</a>
+<a href="https://lijunchang.github.io/pdf/2022-ged-tkde.pdf">Accelerating Graph Similarity Search via Efficient GED Computation.</a>
 Accepted by TKDE in Feburary 2022
 </pre>
 
