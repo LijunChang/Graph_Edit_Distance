@@ -97,10 +97,10 @@ int main(int argc, char *argv[]) {
 #ifndef NDEBUG
 	printf("**** GED (Debug) build at %s %s ***\n", __TIME__, __DATE__);
 #else
-	printf("**** GED (Release) build at %s %s ***\n", __TIME__, __DATE__);
+	// printf("**** GED (Release) build at %s %s ***\n", __TIME__, __DATE__);
 #endif
 
-	print_usage();
+	// print_usage();
 
 	string mode, paradigm, lower_bound;
 	int threshold = -1;
@@ -130,7 +130,7 @@ int main(int argc, char *argv[]) {
 	map<string, ui> vM, eM;
 	ui max_db_n = load_db(database.c_str(), db, vM, eM);
 
-	printf("*** %s %s %s %d: %s %s", mode.c_str(), paradigm.c_str(), lower_bound.c_str(), threshold, database.c_str(), query.c_str());
+	// printf("*** %s %s %s %d: %s %s", mode.c_str(), paradigm.c_str(), lower_bound.c_str(), threshold, database.c_str(), query.c_str());
 #ifdef _EXPAND_ALL_
 	//printf(" Expand_all");
 #else
@@ -142,7 +142,7 @@ int main(int argc, char *argv[]) {
 #ifndef _UPPER_BOUND_
 	printf(" NoUpper_bound");
 #endif
-	printf(" ***\n");
+	// printf(" ***\n");
 
 	vector<Graph *> queries;
 	ui max_query_n = load_db(query.c_str(), queries, vM, eM);
@@ -185,12 +185,11 @@ int main(int argc, char *argv[]) {
 			printf("Query size != db size in the pair mode\n");
 			exit(0);
 		}
-		if(print_ged) printf("*** GEDs ***\n");
 		ui min_ged = 1000000000, max_ged = 0;
 		for(ui i = 0;i < queries.size();i ++) {
 			ui current = i*100/queries.size();
 			if(current != pre) {
-				fprintf(stderr, "\r[%d%% finished]", current);
+				// fprintf(stderr, "\r[%d%% finished]", current);
 				fflush(stderr);
 				//cout<<"\r["<<current<<"% finished]"<<flush;
 				pre = current;
@@ -238,10 +237,10 @@ int main(int argc, char *argv[]) {
 			delete app;
 		}
 		fprintf(stderr, "\n");
-		if(print_ged) {
-			printf("*** GEDs ***\n");
-			printf("min_ged: %u, max_ged: %u\n", min_ged, max_ged);
-		}
+		// if(print_ged) {
+		// 	printf("*** GEDs ***\n");
+		// 	printf("min_ged: %u, max_ged: %u\n", min_ged, max_ged);
+		// }
 
 		//printf("%d %d\n", cnt1, cnt2);
 		if(cnt1 + cnt2 != 0) printf("total average time: %s, total average_ss: %lld\n", Utility::integer_to_string((time1+time2)/(cnt1+cnt2)).c_str(), (ss1+ss2)/(cnt1+cnt2));
@@ -264,13 +263,13 @@ int main(int argc, char *argv[]) {
 	}
 	else {
 		long long total_res = 0;
-		if(print_ged) printf("*** GEDs ***\n");
+		// if(print_ged) printf("*** GEDs ***\n");
 		ui min_ged = 1000000000, max_ged = 0;
 		for(ui i = 0;i < queries.size();i ++) {
 			for(ui j = 0; j < db.size();j ++) {
 				ui current = (i*(long long)(db.size())+j+1)*100/(queries.size()*(long long)(db.size()));
 				if(current != pre) {
-					fprintf(stderr, "\r[%d%% finished]", current);
+					// fprintf(stderr, "\r[%d%% finished]", current);
 					fflush(stderr);
 					//cout<<"\r["<<current<<"% finished]"<<flush;
 					pre = current;
@@ -306,13 +305,13 @@ int main(int argc, char *argv[]) {
 			if(print_ged) printf("\n");
 		}
 		fprintf(stderr, "\n");
-		if(print_ged) {
-			printf("*** GEDs ***\n");
-			printf("min_ged: %u, max_ged: %u\n", min_ged, max_ged);
-		}
+		// if(print_ged) {
+		// 	printf("*** GEDs ***\n");
+		// 	printf("min_ged: %u, max_ged: %u\n", min_ged, max_ged);
+		// }
 		//printf("Average GED: %.3lf\n", double(total_res)/(queries.size()*db.size()));
 	}
-	printf("Total time: %s (microseconds), total search space: %lld\n #candidates: %lld, #matches: %lld\n", Utility::integer_to_string(t.elapsed()).c_str(), search_space, candidates_cnt, results_cnt);
+	// printf("Total time: %s (microseconds), total search space: %lld\n #candidates: %lld, #matches: %lld\n", Utility::integer_to_string(t.elapsed()).c_str(), search_space, candidates_cnt, results_cnt);
 
 	delete[] vlabel_cnt; vlabel_cnt = NULL;
 	delete[] elabel_cnt; elabel_cnt = NULL;
