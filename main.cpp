@@ -292,6 +292,7 @@ int main(int argc, char *argv[]) {
 				if(print_ged) {
 					if(j) printf(" ");
 					printf("%u", res);
+					// return res;
 					if(res > max_ged) max_ged = res;
 					if(res < min_ged) min_ged = res;
 				}
@@ -302,9 +303,9 @@ int main(int argc, char *argv[]) {
 				if(res <= verify_upper_bound) ++ results_cnt;
 				delete app;
 			}
-			if(print_ged) printf("\n");
+			// if(print_ged) printf("\n");
 		}
-		fprintf(stderr, "\n");
+		// fprintf(stderr, "\n");
 		// if(print_ged) {
 		// 	printf("*** GEDs ***\n");
 		// 	printf("min_ged: %u, max_ged: %u\n", min_ged, max_ged);
