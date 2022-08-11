@@ -124,6 +124,7 @@ string mode, paradigm, lower_bound;
 
 int query(int id1, int id2)
 {
+
 	ui lb = db[id1]->ged_lower_bound_filter(db[id2], verify_upper_bound, vlabel_cnt, elabel_cnt, degree_q, degree_g, tmp);
 	if (lb > verify_upper_bound)
 		return -1;
@@ -149,32 +150,22 @@ int query(int id1, int id2)
 	return res;
 }
 
-
-int main(int argc, char *argv[])
+void init()
 {
 	int threshold = -1;
 	bool print_ged = false;
-
-	// OptionParser op("Allowed options");
-	// auto mode_option = op.add<Value<string>>("m", "mode", "\'running mode\' (search | pair)", "search", &mode);
-	// auto paradigm_option = op.add<Value<string>>("p", "paradigm", "\'search paradigm\' (astar | dfs)", "astar", &paradigm);
-	// // auto lower_bound_option = op.add<Value<string>>("l", "lower_bound", "\'lower bound method\' (LSa | BMao | BMa)", "BMao", &lower_bound);
-	// auto threshold_option = op.add<Value<int>>("t", "threshold", "\'threshold for GED verification; if not provided, then GED computation", -1, &threshold);
-	// op.add<Switch>("g", "ged", "\'print_ged\'", &print_ged);
-
-	// op.parse(argc, argv);
 
 	string database = "../dataForReal/graphs.txt";
 
 	map<string, ui> vM, eM;
 	ui max_db_n = load_db(database.c_str(), db, vM, eM);
-
-	ui verify_upper_bound;
+	// printf("%ld\n", db.size());
+	ui verify_upper_bound;//zhelichongxingdingyilemeishyoushanchu
 	if (threshold < 0)
 		verify_upper_bound = INF;
 	else
 		verify_upper_bound = (ui)threshold;
-
+	// cout<<verify_upper_bound<<endl;
 	long long search_space = 0;
 	long long results_cnt = 0, candidates_cnt = 0;
 
@@ -195,8 +186,6 @@ int main(int argc, char *argv[])
 	long long time2 = 0, cnt2 = 0, ss2 = 0;
 
 	ui min_ged = 1000000000, max_ged = 0;
-
-	return 0;
 }
 
 void clean_up()
@@ -217,4 +206,13 @@ void clean_up()
 		delete db[i];
 		db[i] = nullptr;
 	}
+}
+
+int main()
+{
+	init();
+
+	cout << query(1, 0) << endl;
+	// clean_up();
+	return 0;
 }
