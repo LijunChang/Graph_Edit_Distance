@@ -126,14 +126,17 @@ int query(int id1, int id2)
 {
 
 	ui lb = db[id1]->ged_lower_bound_filter(db[id2], verify_upper_bound, vlabel_cnt, elabel_cnt, degree_q, degree_g, tmp);
+
 	if (lb > verify_upper_bound)
 		return -1;
 
 	// ++candidates_cnt;
 	Timer t1;
+
 	Application *app = new Application(verify_upper_bound, "BMao");
 	app->init(db[id1], db[id2]);
 	int res = INF;
+
 	res = app->AStar();
 
 	// search_space += app->get_search_space();
@@ -144,7 +147,7 @@ int query(int id1, int id2)
 	else
 		res = -1;
 
-	printf("%d", res);
+	// printf("%d", res);
 
 	delete app;
 	return res;
@@ -160,25 +163,24 @@ void init()
 	map<string, ui> vM, eM;
 	ui max_db_n = load_db(database.c_str(), db, vM, eM);
 	// printf("%ld\n", db.size());
-	ui verify_upper_bound;//zhelichongxingdingyilemeishyoushanchu
 	if (threshold < 0)
 		verify_upper_bound = INF;
 	else
 		verify_upper_bound = (ui)threshold;
-	// cout<<verify_upper_bound<<endl;
+
 	long long search_space = 0;
 	long long results_cnt = 0, candidates_cnt = 0;
 
 	ui pre = 1000;
 
-	int *vlabel_cnt = new int[vM.size()];
-	int *elabel_cnt = new int[eM.size()];
+	vlabel_cnt = new int[vM.size()];
+	elabel_cnt = new int[eM.size()];
 	memset(vlabel_cnt, 0, sizeof(int) * vM.size());
 	memset(elabel_cnt, 0, sizeof(int) * eM.size());
 
-	int *degree_q = new int[max_db_n];
-	int *degree_g = new int[max_db_n];
-	int *tmp = new int[max_db_n];
+	degree_q = new int[max_db_n];
+	degree_g = new int[max_db_n];
+	tmp = new int[max_db_n];
 
 	Timer t;
 
@@ -211,8 +213,9 @@ void clean_up()
 int main()
 {
 	init();
-
-	cout << query(1, 0) << endl;
+	cout<<query(0, 1)<<endl;
+	cout<<query(0, 3)<<endl;
+	cout<<query(0, 5)<<endl;
 	// clean_up();
 	return 0;
 }
