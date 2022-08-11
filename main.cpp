@@ -93,22 +93,11 @@ void write_queries(const char *file_name, const vector<Graph *> &db, const vecto
 }
 
 int main(int argc, char *argv[]) {
-
-#ifndef NDEBUG
-	printf("**** GED (Debug) build at %s %s ***\n", __TIME__, __DATE__);
-#else
-	// printf("**** GED (Release) build at %s %s ***\n", __TIME__, __DATE__);
-#endif
-
-	// print_usage();
-
 	string mode, paradigm, lower_bound;
 	int threshold = -1;
 	bool print_ged = false;
 
 	OptionParser op("Allowed options");
-	auto help_option = op.add<Switch>("h", "help", "\'produce help message\'");
-	auto database_option = op.add<Value<string>>("d", "database", "\'database file name\'");
 	auto query_option = op.add<Value<string>>("q", "query", "\'query file name\'");
 	auto mode_option = op.add<Value<string>>("m", "mode", "\'running mode\' (search | pair)", "search", &mode);
 	auto paradigm_option = op.add<Value<string>>("p", "paradigm", "\'search paradigm\' (astar | dfs)", "astar", &paradigm);
@@ -118,12 +107,8 @@ int main(int argc, char *argv[]) {
 
 	op.parse(argc, argv);
 
-	if(help_option->is_set()||argc == 1) cout << op << endl;
-	if(!database_option->is_set()||!query_option->is_set()) {
-		printf("!!! Database file name or query file name is not provided! Exit !!!\n");
-		return 0;
-	}
-	string database = database_option->value();
+
+	string database = "../dataForReal/52373.txt";
 	string query = query_option->value();
 
 	vector<Graph *> db;
@@ -185,6 +170,7 @@ int main(int argc, char *argv[]) {
 			printf("Query size != db size in the pair mode\n");
 			exit(0);
 		}
+		// if(print_ged) printf("*** GEDs ***\n");
 		ui min_ged = 1000000000, max_ged = 0;
 		for(ui i = 0;i < queries.size();i ++) {
 			ui current = i*100/queries.size();
@@ -204,116 +190,20 @@ int main(int argc, char *argv[]) {
 			app->init(db[i], queries[i]);
 			int res = INF;
 			if(strcmp(paradigm.c_str(), "astar") == 0) res = app->AStar();
-			else res = app->DFS(NULL);
-#ifndef NDEBUG
-			assert(res == app->compute_ged_of_BX());
-#endif
+			else res = app->DFS(NULL); //Why I didn't see this thought it's all DFS
+
 			search_space += app->get_search_space();
 			if(res <= verify_upper_bound) ++ results_cnt;
 			else res = -1;
 
-			if(print_ged) {
-				printf("%d\n", res);
-				if(res > max_ged) max_ged = res;
-				if(res < min_ged) min_ged = res;
-			}
 
-			if(res == -1) {
-				time2 += t1.elapsed();
-				ss2 += app->get_search_space();
-				++ cnt2;
-			}
-			else {
-				time1 += t1.elapsed();
-				ss1 += app->get_search_space();
-				++ cnt1;
-			}
-
-			//printf("%u %u\n", db[i]->n, queries[i]->n);
-			//if(db[i]->id.compare(queries[i]->id) < 0) printf("\t(pair_%u %s %s) GED: %d, Time: %s, Search space: %lld\n", i, db[i]->id.c_str(), queries[i]->id.c_str(), res, Utility::integer_to_string(t1.elapsed()).c_str(), app->get_search_space());
-			//else printf("\t(pair_%u %s %s) GED: %d, Time: %s, Search space: %lld\n", i, queries[i]->id.c_str(), db[i]->id.c_str(), res, Utility::integer_to_string(t1.elapsed()).c_str(), app->get_search_space());
-			//fflush(stdout);
+			printf("%d", res);
 
 			delete app;
 		}
-		fprintf(stderr, "\n");
-		// if(print_ged) {
-		// 	printf("*** GEDs ***\n");
-		// 	printf("min_ged: %u, max_ged: %u\n", min_ged, max_ged);
-		// }
+	
 
-		//printf("%d %d\n", cnt1, cnt2);
-		if(cnt1 + cnt2 != 0) printf("total average time: %s, total average_ss: %lld\n", Utility::integer_to_string((time1+time2)/(cnt1+cnt2)).c_str(), (ss1+ss2)/(cnt1+cnt2));
-		if(verify_upper_bound < INF) {
-			printf("Dissimilar (%lld pairs) average time: ", cnt2);
-			if(cnt2 == 0) printf("0, ");
-			else printf("%s, ", Utility::integer_to_string(time2/cnt2).c_str());
-
-			printf("Dissimilar average space: ");
-			if(cnt2 == 0) printf("0\n");
-			else printf("%lld\n", ss2/cnt2);
-
-			printf("Similar (%lld pairs) average time: ", cnt1);
-			if(cnt1 == 0) printf("0, ");
-			else printf("%s, ", Utility::integer_to_string(time1/cnt1).c_str());
-			printf("Similar average space: ");
-			if(cnt1 == 0) printf("0\n");
-			else printf("%lld\n", ss1/cnt1);
-		}
 	}
-	else {
-		long long total_res = 0;
-		// if(print_ged) printf("*** GEDs ***\n");
-		ui min_ged = 1000000000, max_ged = 0;
-		for(ui i = 0;i < queries.size();i ++) {
-			for(ui j = 0; j < db.size();j ++) {
-				ui current = (i*(long long)(db.size())+j+1)*100/(queries.size()*(long long)(db.size()));
-				if(current != pre) {
-					// fprintf(stderr, "\r[%d%% finished]", current);
-					fflush(stderr);
-					//cout<<"\r["<<current<<"% finished]"<<flush;
-					pre = current;
-				}
-
-				ui lb = queries[i]->ged_lower_bound_filter(db[j], verify_upper_bound, vlabel_cnt, elabel_cnt, degree_q, degree_g, tmp);
-				if(lb > verify_upper_bound) continue;
-
-				++ candidates_cnt;
-				Application *app = new Application(verify_upper_bound, lower_bound.c_str());
-				//app->init(db_v[i], db_e[i], query_v[i], query_e[i]);
-				app->init(db[j], queries[i]);
-				int res = INF;
-				if(strcmp(paradigm.c_str(), "astar") == 0) res = app->AStar();
-				else res = app->DFS(NULL);
-#ifndef NDEBUG
-				assert(res == app->compute_ged_of_BX());
-#endif
-
-				if(print_ged) {
-					if(j) printf(" ");
-					printf("%u", res);
-					// return res;
-					if(res > max_ged) max_ged = res;
-					if(res < min_ged) min_ged = res;
-				}
-				total_res += res;
-				//printf("pair %lu (%s, %s): %d\n", i*db.size()+j, queries[i]->id.c_str(), db[j]->id.c_str(), res);
-
-				search_space += app->get_search_space();
-				if(res <= verify_upper_bound) ++ results_cnt;
-				delete app;
-			}
-			// if(print_ged) printf("\n");
-		}
-		// fprintf(stderr, "\n");
-		// if(print_ged) {
-		// 	printf("*** GEDs ***\n");
-		// 	printf("min_ged: %u, max_ged: %u\n", min_ged, max_ged);
-		// }
-		//printf("Average GED: %.3lf\n", double(total_res)/(queries.size()*db.size()));
-	}
-	// printf("Total time: %s (microseconds), total search space: %lld\n #candidates: %lld, #matches: %lld\n", Utility::integer_to_string(t.elapsed()).c_str(), search_space, candidates_cnt, results_cnt);
-
 	delete[] vlabel_cnt; vlabel_cnt = NULL;
 	delete[] elabel_cnt; elabel_cnt = NULL;
 	delete[] degree_q; degree_q = NULL;
