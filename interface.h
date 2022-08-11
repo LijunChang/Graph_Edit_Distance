@@ -3,6 +3,7 @@
 #include "Utility.h"
 #include "Timer.h"
 #include "popl.hpp"
+#include "Application.cpp"
 
 using namespace std;
 using namespace popl;
@@ -153,12 +154,12 @@ int query(int id1, int id2)
 	return res;
 }
 
-void init()
+void init(string path)
 {
 	int threshold = -1;
 	bool print_ged = false;
 
-	string database = "../dataForReal/graphs.txt";
+	string database = path;
 
 	map<string, ui> vM, eM;
 	ui max_db_n = load_db(database.c_str(), db, vM, eM);
@@ -212,10 +213,10 @@ void clean_up()
 
 int _main()
 {
-	init();
+	init("../dataForReal/graphs.txt");
 	cout<<query(0, 1)<<endl;
 	cout<<query(0, 3)<<endl;
 	cout<<query(0, 5)<<endl;
-	// clean_up();
+	clean_up();
 	return 0;
 }
