@@ -129,7 +129,7 @@ int query(int id1, int id2)
 
 	if (lb > verify_upper_bound)
 		return -1;
-
+	// this is not nessnery for ours because everything we have is already lower or equal to the lower bound
 	// ++candidates_cnt;
 	Timer t1;
 

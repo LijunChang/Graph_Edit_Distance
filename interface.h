@@ -127,7 +127,7 @@ int query(int id1, int id2)
 {
 
 	ui lb = db[id1]->ged_lower_bound_filter(db[id2], verify_upper_bound, vlabel_cnt, elabel_cnt, degree_q, degree_g, tmp);
-
+	// cout<<"lb = "<<lb<<endl;
 	if (lb > verify_upper_bound)
 		return -1;
 
