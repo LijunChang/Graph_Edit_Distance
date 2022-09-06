@@ -21,7 +21,7 @@ ui label2int(const char *str, map<string, ui> &M)
 	return M[string(str)];
 }
 
-ui load_db(const char *file_name, vector<Graph *> &graphs, map<string, ui> &vM, map<string, ui> &eM)
+ui load_db(const char *file_name, vector<Graph *> &graphs, map<string, ui> &vM, map<string, ui> &eM, int N=-1)
 {
 	FILE *fin = Utility::open_file(file_name, "r");
 
@@ -123,13 +123,30 @@ int *degree_g;
 int *tmp;
 string mode, paradigm, lower_bound;
 
+
+bool verification(int id1, int id2, int vub) //If the real dis is lower than vub
+{
+	ui lb = db[id1]->ged_lower_bound_filter(db[id2], vub, vlabel_cnt, elabel_cnt, degree_q, degree_g, tmp);
+	if (lb > verify_upper_bound)
+		return false;
+	Application *app = new Application(verify_upper_bound, "BMao");
+	app->init(db[id1], db[id2]);
+	int res = INF;
+	res = app->AStar();
+	if (res <= verify_upper_bound)
+		return true;
+	return false;
+}
+
 int query(int id1, int id2)
 {
 
-	ui lb = db[id1]->ged_lower_bound_filter(db[id2], verify_upper_bound, vlabel_cnt, elabel_cnt, degree_q, degree_g, tmp);
+	// ui lb = db[id1]->ged_lower_bound_filter(db[id2], verify_upper_bound, vlabel_cnt, elabel_cnt, degree_q, degree_g, tmp);
 	// cout<<"lb = "<<lb<<endl;
-	if (lb > verify_upper_bound)
-		return -1;
+	// if (lb > verify_upper_bound)
+	// 	return -1;
+	//need the vub not the lb!!!!!!!! The result before is not useable! chaojikun hcaojikun yunnashoueixn quanbuhconglai 
+	//WHY!!?!?!?jiaotong 
 
 	// ++candidates_cnt;
 	Timer t1;

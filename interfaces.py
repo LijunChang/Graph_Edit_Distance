@@ -10,3 +10,4 @@ def getGED(id1, id2):
     file1 = "../dataForReal/{}".format(id1)
     file2 = "../dataForReal/{}".format(id2)
     return int(subprocess.check_output(['./old.out', '-d', file1, '-q', file2, '-g']))
+5/0
